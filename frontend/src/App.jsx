@@ -2,7 +2,10 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 
-const API_URL = 'http://localhost:5000/api/alarms';
+const rawApiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_URL = rawApiUrl.endsWith('/api/alarms')
+  ? rawApiUrl
+  : `${rawApiUrl.replace(/\/$/, '')}/api/alarms`;
 
 function App() {
   const [location, setLocation] = useState(null);
